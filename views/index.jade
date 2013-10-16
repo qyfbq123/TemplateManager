@@ -1,0 +1,22 @@
+extends layout
+block body
+  .main(style='margin-top: 70px;')
+    .container
+      div(ng-controller = 'AppCtrl')
+        .row
+          .col-sm-6.col-md-3
+            .thumbnail
+              img(src='/RenRen/image/人人网.bmp', alt='...')
+              p
+                a(href="#", class="btn btn-primary") Button
+                a(href="#", class="btn btn-default") Button
+          .col-sm-6.col-md-3
+            .thumbnail
+              img(data-src='/RenRen/image/人人网.bmp')
+          .col-sm-6.col-md-3
+            .thumbnail
+              img(data-src='/RenRen/image/人人网.bmp')
+          .col-sm-6.col-md-3
+            .thumbnail
+              img(data-src='/RenRen/image/人人网.bmp')
+  script(src = 'components/angular/angular.js')
