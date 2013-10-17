@@ -2,11 +2,10 @@ express = require 'express'
 routes = require './routes'
 http = require 'http'
 path = require 'path'
+config = require './config.json'
 
 app = module.exports = express()
 server = require('http').createServer app
-
-templatesPath = '/Users/qian/templates'
 
 app.set 'port', process.env.PORT || 3000
 app.set 'views', path.join __dirname, 'views'
@@ -15,7 +14,7 @@ app.use express.logger 'dev'
 app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.static path.join __dirname, 'public'
-app.use express.static templatesPath, (redirect: false)
+app.use express.static path.resolve __dirname, '.', config.templatesPath
 app.use app.router
 
 app.configure 'development', ->

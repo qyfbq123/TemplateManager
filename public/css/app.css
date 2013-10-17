@@ -1,0 +1,9 @@
+.test{
+  color: #b8b8b8;
+  font-size:28px;
+  font-family: 'Open Sans',arial,sans-serif;
+  text-shadow:0 1px rgba(255,255,255,0.8);
+  font-weight:lighter;
+  padding:10px 0 5px 10px;
+  clear: both;
+}

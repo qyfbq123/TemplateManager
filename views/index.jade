@@ -1,22 +1,57 @@
 extends layout
 block body
   .main(style='margin-top: 70px;')
-    .container
-      div(ng-controller = 'AppCtrl')
-        .row
-          .col-sm-6.col-md-3
-            .thumbnail
-              img(src='/RenRen/image/人人网.bmp', alt='...')
-              p
-                a(href="#", class="btn btn-primary") Button
-                a(href="#", class="btn btn-default") Button
-          .col-sm-6.col-md-3
-            .thumbnail
-              img(data-src='/RenRen/image/人人网.bmp')
-          .col-sm-6.col-md-3
-            .thumbnail
-              img(data-src='/RenRen/image/人人网.bmp')
-          .col-sm-6.col-md-3
-            .thumbnail
-              img(data-src='/RenRen/image/人人网.bmp')
+    .container(ng-controller = 'AppCtrl')
+      .row
+        .col-md-3
+        .col-md-9
+          .test 论坛
+          .row
+            .col-md-6
+              .thumbnail(href='#')
+                .row
+                  .col-md-5
+                    img(src='/images/some.png', alt='...')
+                  .col-md-5
+                    h5 Thumbnail label
+                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+                    p
+                      a.btn.btn-primary(href='#') Button
+                      a.btn(href='#') Action
+            .col-md-6
+              .thumbnail(href='#')
+                .row
+                  .col-md-5
+                    img(src='/images/some.png', alt='...')
+                  .col-md-5
+                    h5 Thumbnail label
+                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+                    p
+                      a.btn.btn-primary(href='#') Button
+                      a.btn(href='#') Action
+
+          .test 测试
+          .row
+            .col-md-6
+              .thumbnail(href='#')
+                .row
+                  .col-md-5
+                    img(src='/images/some.png', alt='...')
+                  .col-md-5
+                    h5 Thumbnail label
+                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+                    p
+                      a.btn.btn-primary(href='#') Button
+                      a.btn(href='#') Action
+            .col-md-6
+              .thumbnail(href='#')
+                .row
+                  .col-md-5
+                    img(src='/images/some.png', alt='...')
+                  .col-md-5
+                    h5 Thumbnail label
+                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+                    p
+                      a.btn.btn-primary(href='#') Button
+                      a.btn(href='#') Action
   script(src = 'components/angular/angular.js')
