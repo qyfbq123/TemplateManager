@@ -6,6 +6,7 @@
     "express": "~3.2.6",
     "socket.io": "latest",
     "jade": "~0.31.2",
-    "iced-coffee-script": "~1.6.3-g"
+    "iced-coffee-script": "~1.6.3-g",
+    "watch": "~0.8.0"
   }
 }
