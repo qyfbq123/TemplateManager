@@ -1,5 +1,7 @@
 path = require 'path'
 fs = require 'fs'
+watch = require 'watch'
+
 config = require '../config.json'
 
 templatesPath = path.resolve __dirname, '..', config.templatesPath
@@ -7,9 +9,18 @@ templatesPath = path.resolve __dirname, '..', config.templatesPath
 tem = exports = module.exports = {}
 
 tem.init = ->
-  this.reading = false
+  self = this
+  self.reading = false
+  self.categories = []
+  tem.readTemplates (allTemplates)->
+    console.log allTemplates
+    allTemplates.forEach (ele, index)->
+      if self.categories.indexOf(ele.category) is -1
+        self.categories.push ele.category
+    console.log self.categories
 
-readTemplates = (cb)->
+
+tem.readTemplates = (cb)->
   allTemplates = []
   cb = {} if !cb
   cb.pending = 0 if !cb.pending
@@ -29,14 +40,11 @@ readTemplates = (cb)->
             if exists
               manifest = require manifestPath
               _manifest = {}
-              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version']
-              _manifest.category = k for k, v of _manifest.category
-              allTemplates.push _manifest
+              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'index', 'version']
+              if typeof _manifest.category is 'object' and not Array.isArray _manifest.category
+                _manifest.category = k for k, v of _manifest.category
+                allTemplates.push _manifest
             if done
               allTemplates.sort (a, b)->
                 return a.index - b.index
-
-module.exports.readTemplates = readTemplates
-fs.watch templatesPath, (event, filename)->
-  console.log "event:#{event} , filename:#{filename}"
-module.exports.allTemplates = allTemplates
+              cb allTemplates
