@@ -4,24 +4,23 @@ watch = require 'watch'
 
 config = require '../config.json'
 
-templatesPath = path.resolve __dirname, '..', config.templatesPath
-
 tem = exports = module.exports = {}
 
 tem.init = ->
   self = this
   self.reading = false
   self.categories = []
-  tem.readTemplates (allTemplates)->
-    console.log allTemplates
-    allTemplates.forEach (ele, index)->
+  tem.readTemplates (e)->
+    console.log this
+    self.allTemplates.forEach (ele, index)->
       if self.categories.indexOf(ele.category) is -1
         self.categories.push ele.category
     console.log self.categories
 
 
 tem.readTemplates = (cb)->
-  allTemplates = []
+  templatesPath = path.resolve __dirname, '..', config.templatesPath
+  this.allTemplates = allTemplates = []
   cb = {} if !cb
   cb.pending = 0 if !cb.pending
   fs.readdir templatesPath, (err, files)->
@@ -39,11 +38,13 @@ tem.readTemplates = (cb)->
             done = cb.pending is 0
             if exists
               manifest = require manifestPath
-              _manifest = {}
+              _manifest = dirName: fileName
               _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'index', 'version']
-              if typeof _manifest.category is 'object' and not Array.isArray _manifest.category
-                _manifest.category = k for k, v of _manifest.category
-                allTemplates.push _manifest
+              if typeof manifest.category is 'object' and not Array.isArray manifest.category
+                _manifest.category = k for k, v of manifest.category
+              else if !manifest.category
+                _manifest.category = 'Other'
+              allTemplates.push _manifest  if _manifest.category
             if done
               allTemplates.sort (a, b)->
                 return a.index - b.index
