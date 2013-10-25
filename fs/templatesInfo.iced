@@ -8,19 +8,29 @@ tem = exports = module.exports = {}
 
 tem.init = ->
   self = this
+  console.log self
   self.reading = false
   self.categories = []
   tem.readTemplates (e)->
-    console.log this
+
+    self.allTemplates.sort (a, b)->
+      if !a.index && !b.index
+        return 0
+      else if !a.index
+        return 1
+      else if !b.index
+        return -1
+      return a.index - b.index
     self.allTemplates.forEach (ele, index)->
       if self.categories.indexOf(ele.category) is -1
         self.categories.push ele.category
-    console.log self.categories
 
 
 tem.readTemplates = (cb)->
   templatesPath = path.resolve __dirname, '..', config.templatesPath
+
   this.allTemplates = allTemplates = []
+  
   cb = {} if !cb
   cb.pending = 0 if !cb.pending
   fs.readdir templatesPath, (err, files)->
@@ -45,7 +55,4 @@ tem.readTemplates = (cb)->
               else if !manifest.category
                 _manifest.category = 'Other'
               allTemplates.push _manifest  if _manifest.category
-            if done
-              allTemplates.sort (a, b)->
-                return a.index - b.index
-              cb allTemplates
+            cb() if done
