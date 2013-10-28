@@ -1,7 +1,9 @@
 express = require 'express'
-routes = require './routes'
 http = require 'http'
 path = require 'path'
+
+routes = require './routes'
+templates = require './routes/templates'
 config = require './config.json'
 
 app = module.exports = express()
@@ -21,6 +23,12 @@ app.configure 'development', ->
   app.use express.errorHandler()
 
 app.get '/', routes.index
+
+app.all '/templates/all/', templates.all
+app.get '/templates/categories/', templates.categories
+
+ # redirect all others to the index (HTML5 history)
+app.get '*', routes.index
 
 server.listen app.get( 'port' ), ->
   console.log "Express server listening on port #{app.get 'port'}"

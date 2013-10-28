@@ -3,8 +3,13 @@ block body
   .main(style='margin-top: 70px;')
     .container(ng-controller = 'AppCtrl')
       .row
-        .col-md-3
-        .col-md-9
+        .col-md-2
+          ul.nav.nav-pills.nav-stacked(role='navigation', style='background-color: rgb(247, 245, 250);')
+            li.active
+              a(href='#') Home
+            li(ng-repeat='category in categories')
+              a(href='view1', data-toggle='pill') {{category}}
+        .col-md-10(ng-view)
           .test 论坛
           .row
             .col-md-6
@@ -55,3 +60,8 @@ block body
                       a.btn.btn-primary(href='#') Button
                       a.btn(href='#') Action
   script(src = 'components/angular/angular.js')
+  script(src = 'js/app.js')
+  script(src = 'js/controllers.js')
+  script(src = 'components/jquery/jquery.js')
+  script(src = '/bootstrap/js/bootstrap.min.js')
+  script(src = 'js/util.js')

@@ -22,8 +22,8 @@ tem.init = ->
         return -1
       return a.index - b.index
     self.allTemplates.forEach (ele, index)->
-      if self.categories.indexOf(ele.category) is -1
-        self.categories.push ele.category
+      if self.categories.indexOf(ele._category) is -1
+        self.categories.push ele._category
 
 
 tem.readTemplates = (cb)->
@@ -49,10 +49,10 @@ tem.readTemplates = (cb)->
             if exists
               manifest = require manifestPath
               _manifest = dirName: fileName
-              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'index', 'version']
+              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version']
               if typeof manifest.category is 'object' and not Array.isArray manifest.category
-                _manifest.category = k for k, v of manifest.category
+                _manifest._category = k for k, v of manifest.category
               else if !manifest.category
-                _manifest.category = 'Other'
-              allTemplates.push _manifest  if _manifest.category
+                _manifest._category = 'Other'
+              allTemplates.push _manifest  if _manifest._category
             cb() if done
