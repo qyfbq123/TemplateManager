@@ -1,14 +1,18 @@
 path = require 'path'
 fs = require 'fs'
 watch = require 'watch'
+AdmZip = require 'adm-zip'
 
 config = require '../config.json'
 
 tem = exports = module.exports = {}
 
+templatesPath = path.resolve __dirname, '..', config.templatesPath
+if !fs.existsSync _tempPath = path.join templatesPath, '_temp'
+  fs.mkdirSync _tempPath
+
 tem.init = ->
   self = this
-  console.log self
   self.reading = false
   self.categories = []
   tem.readTemplates (e)->
@@ -22,12 +26,17 @@ tem.init = ->
         return -1
       return a.index - b.index
     self.allTemplates.forEach (ele, index)->
+      ele.id = index
       if self.categories.indexOf(ele._category) is -1
         self.categories.push ele._category
 
+      templatePath = path.resolve templatesPath, ele.dirName
+      zipPath = path.join _tempPath, ele.dirName + '.zip'
+      zip = new AdmZip()
+      zip.addLocalFolder templatePath
+      zip.writeZip zipPath
 
 tem.readTemplates = (cb)->
-  templatesPath = path.resolve __dirname, '..', config.templatesPath
 
   this.allTemplates = allTemplates = []
   
@@ -56,3 +65,16 @@ tem.readTemplates = (cb)->
                 _manifest._category = 'Other'
               allTemplates.push _manifest  if _manifest._category
             cb() if done
+
+tem.getTemplateById = (id)->
+  template = null
+  this.allTemplates.some (ele, index)->
+    if ele.id == Number id
+      template = ele
+      return true
+
+  return template
+
+tem.getTemplatesByCategory = (category)->
+  return tem.allTemplates.filter (ele, index)->
+    return ele._category == category

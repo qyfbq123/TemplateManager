@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('myApp', []).
-  config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider.when('/view1', {templateUrl: 'test.html', controller: MyCtrl});
+angular.module('myApp', ['ngRoute']).
+  config(function($routeProvider, $locationProvider) {
+  $routeProvider.when('/', {templateUrl: '/templates/', controller: MainCtrl});
+  $routeProvider.when('/templates', {templateUrl: '/templates/', controller: MainCtrl});
+  $routeProvider.when('/subTemplates/:category', {templateUrl: '/subTemplates/', controller: SubCtrl});
   $locationProvider.html5Mode(true);
-}]);
+});

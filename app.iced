@@ -3,7 +3,7 @@ http = require 'http'
 path = require 'path'
 
 routes = require './routes'
-templates = require './routes/templates'
+api = require './routes/api'
 config = require './config.json'
 
 app = module.exports = express()
@@ -24,8 +24,16 @@ app.configure 'development', ->
 
 app.get '/', routes.index
 
-app.all '/templates/all/', templates.all
-app.get '/templates/categories/', templates.categories
+app.get '/templates/', routes.templates
+app.get '/subTemplates/', routes.subTemplates
+
+app.get '/api/categories/', api.categories
+app.get '/api/templates/sort/', api.templatesSortByCategory
+
+app.all '/api/templates/', api.templates
+app.get '/api/templates/:category/', api.subTemplates
+
+app.get '/api/template:tid/download/', api.download
 
  # redirect all others to the index (HTML5 history)
 app.get '*', routes.index

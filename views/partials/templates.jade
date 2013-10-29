@@ -1,0 +1,37 @@
+header(ng-repeat-start = 'st in sortedTemplates')
+.q_title {{st.category}}
+.col-md-6(ng-repeat='t in st.templates')
+  .thumbnail(href='#')
+    .row
+      .col-md-5
+        img(src='/images/some.png', alt='...')
+      .col-md-5
+        h4 {{t.name}}
+        p.content {{t.description | ommited: 10}}
+        p.text-right
+          a.btn.btn-primary(href='#') 下 载
+
+//- .q_title 测试
+//- .col-md-6
+//-   .thumbnail(href='#')
+//-     .row
+//-       .col-md-5
+//-         img(src='/images/some.png', alt='...')
+//-       .col-md-5
+//-         h5 Thumbnail label
+//-         p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+//-         p
+//-           a.btn.btn-primary(href='#') Button
+//-           a.btn(href='#') Action
+//- .col-md-6
+//-   .thumbnail(href='#')
+//-     .row
+//-       .col-md-5
+//-         img(src='/images/some.png', alt='...')
+//-       .col-md-5
+//-         h5 Thumbnail label
+//-         p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
+//-         p
+//-           a.btn.btn-primary(href='#') Button
+//-           a.btn(href='#') Action
+footer(ng-repeat-end)

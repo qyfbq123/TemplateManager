@@ -6,62 +6,15 @@ block body
         .col-md-2
           ul.nav.nav-pills.nav-stacked(role='navigation', style='background-color: rgb(247, 245, 250);')
             li.active
-              a(href='#') Home
+              a(href='templates', ng-click='navClick($event);') Home
             li(ng-repeat='category in categories')
-              a(href='view1', data-toggle='pill') {{category}}
+              a(href="subTemplates/{{category}}", ng-click='navClick($event);') {{category}}
         .col-md-10(ng-view)
-          .test 论坛
-          .row
-            .col-md-6
-              .thumbnail(href='#')
-                .row
-                  .col-md-5
-                    img(src='/images/some.png', alt='...')
-                  .col-md-5
-                    h5 Thumbnail label
-                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
-                    p
-                      a.btn.btn-primary(href='#') Button
-                      a.btn(href='#') Action
-            .col-md-6
-              .thumbnail(href='#')
-                .row
-                  .col-md-5
-                    img(src='/images/some.png', alt='...')
-                  .col-md-5
-                    h5 Thumbnail label
-                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
-                    p
-                      a.btn.btn-primary(href='#') Button
-                      a.btn(href='#') Action
-
-          .test 测试
-          .row
-            .col-md-6
-              .thumbnail(href='#')
-                .row
-                  .col-md-5
-                    img(src='/images/some.png', alt='...')
-                  .col-md-5
-                    h5 Thumbnail label
-                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
-                    p
-                      a.btn.btn-primary(href='#') Button
-                      a.btn(href='#') Action
-            .col-md-6
-              .thumbnail(href='#')
-                .row
-                  .col-md-5
-                    img(src='/images/some.png', alt='...')
-                  .col-md-5
-                    h5 Thumbnail label
-                    p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
-                    p
-                      a.btn.btn-primary(href='#') Button
-                      a.btn(href='#') Action
+          
   script(src = 'components/angular/angular.js')
+  script(src = 'components/angular-route/angular-route.js')
   script(src = 'js/app.js')
   script(src = 'js/controllers.js')
+  script(src = 'js/filters.js')
   script(src = 'components/jquery/jquery.js')
-  script(src = '/bootstrap/js/bootstrap.min.js')
   script(src = 'js/util.js')
