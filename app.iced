@@ -27,13 +27,13 @@ app.get '/', routes.index
 app.get '/templates/', routes.templates
 app.get '/subTemplates/', routes.subTemplates
 
+app.get '/template:tid/download/', api.download
+
 app.get '/api/categories/', api.categories
 app.get '/api/templates/sort/', api.templatesSortByCategory
 
 app.all '/api/templates/', api.templates
 app.get '/api/templates/:category/', api.subTemplates
-
-app.get '/api/template:tid/download/', api.download
 
  # redirect all others to the index (HTML5 history)
 app.get '*', routes.index

@@ -1,5 +1,6 @@
 header(ng-repeat-start = 'st in sortedTemplates')
 .q_title {{st.category}}
+  small.pull-right 查看所有
 .col-md-6(ng-repeat='t in st.templates')
   .thumbnail(href='#')
     .row
@@ -7,9 +8,9 @@ header(ng-repeat-start = 'st in sortedTemplates')
         img(src='/images/some.png', alt='...')
       .col-md-5
         h4 {{t.name}}
-        p.content {{t.description | ommited: 10}}
+        p.content(title='{{t.description}}') {{t.description | omitted : 55}}
         p.text-right
-          a.btn.btn-primary(href='#') 下 载
+          a.btn.btn-primary(href='/template{{t.id}}/download/', target='_blank') 下 载
 
 //- .q_title 测试
 //- .col-md-6

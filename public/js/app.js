@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['ngRoute']).
+angular.module('myApp', ['ngRoute', 'myApp.filters']).
   config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {templateUrl: '/templates/', controller: MainCtrl});
   $routeProvider.when('/templates', {templateUrl: '/templates/', controller: MainCtrl});

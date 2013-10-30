@@ -8,12 +8,14 @@
   clear: both;
 }
 
+.q_title small {
+  font-size: 20px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
 .content {
   height: 85px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.thumbnail {
-  cursor: pointer;
-}
