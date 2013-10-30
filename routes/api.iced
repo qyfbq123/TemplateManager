@@ -12,8 +12,11 @@ exports.categories = (req, res)->
 
 exports.download = (req, res)->
   t = templates.getTemplateById req.params.tid
-  zipPath = path.resolve __dirname, '..', config.templatesPath, '_temp', t.dirName + '.zip'
-  res.download zipPath, t.dirName + '.zip'
+  if !t
+    res.send 'Error!下载出错!' 
+  else 
+    zipPath = path.resolve __dirname, '..', config.templatesPath, '_temp', t.dirName + '.zip'
+    res.download zipPath, t.dirName + '.zip'
 
 exports.subTemplates = (req, res)->
   res.json templates.getTemplatesByCategory req.params.category
