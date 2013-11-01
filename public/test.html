@@ -1,133 +1,69 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
-</head>
+<!DOCTYPE html>
+<html ng-app="angularjs-starter">
 
-<body>
-<div class="container">
-       
-                <ul class="thumbnails">
-                  <li class="span3">
-                     <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
+  <head lang="en">
+    <meta charset="utf-8">
+    <title>AngularStrap - Tooltip directive</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="//mgcrea.github.com/angular-strap/js/angular-strap.js"></script>
 
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
+    <script>
+    var app = angular.module('angularjs-starter', ['$strap.directives']);
 
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
-                  
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>	
-                    	
-                  </li>
-                  <div style="clear:both;"></div>
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
+app.controller('MainCtrl', function($scope, $window, $location) {
+  
+  // Tooltip
+  $scope.tooltip = {title: "Hello Tooltip<br />This is a multiline message!", checked: false};
 
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
+});
 
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
-
-                  <li class="span3">
-                    <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt=""/>
-                      <h3>Thumbnail label</h3>
-                      <p>Thumbnail caption...</p>
-                    </div>
-                  </li>
-
-                  ...
-                </ul>
-
-               
-                
-    </div><!-- container -->
-
+    </script>
+  </head>
+  
+  <body ng-controller="MainCtrl">
     <div class="container">
-    <ul class="thumbnails">   
-    <li class="span8">
-        <div class="thumbnail">
-            <div class="row-fluid">
-                <div class="span6">
-                    <img alt="" src="http://placehold.it/260x180">
-                </div>
-                <div class="span6 caption">           
-                    <h5>Thumbnail label</h5>
-                    <p>A bunch of text will do here so about this thumbnail heading.  yep goes right here!</p>
-                    <p><a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a></p>
-                </div>
-            </div>
+      <section id="tooltip">
+        <div class="page-header">
+          <h1>Tooltip <small><a href="//github.com/mgcrea/angular-strap/blob/master/src/directives/tooltip.js" target="_blank">directives/tooltip.js</a></small></h1>
         </div>
-    </li>
-    <li class="span8">
-        <div class="thumbnail">
-            <div class="row-fluid">
-                <div class="span6">
-                    <img alt="" src="http://placehold.it/260x180">
-                </div>
-                <div class="span6 caption">          
-                    <h5>Thumbnail label</h5>
-                    <p>A bunch of text will do here so about this thumbnail heading.  yep goes right here!</p>
-                    <p><a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a></p>
-                </div>
+        <h2>Overview and examples</h2>
+        <!--<p><a target="_blank" href="http://twitter.github.com/bootstrap/javascript.html#popovers"><small>boostrap</small></a></p>-->
+        <p>Parses the content passed to the directive & displays a tooltip with it.</p>
+        <p>Use any button/link to trigger a tooltip menu by appending a <code>bs-tooltip</code> attribute.</p>
+        <p>Both <code>$scope.show()</code> and <code>$scope.hide()</code> are available inside the tooltip to toggle its visibility.</p>
+        <div class="bs-docs-example">
+          <pre>tooltip: {{tooltip | json}}</pre>
+          <div class="well">
+            <p>Tight pants next level keffiyeh <a href="" bs-tooltip="123">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown.</p>
+            <hr />
+            <div class="control-group input-prepend">
+              <button type="submit" class="btn" data-trigger="click" bs-tooltip="tooltip.title">Click me</button>
+              <input type="text" class="span3" data-placement="bottom" placeholder="Focus to toggle tooltip" data-trigger="focus" data-unique="1" bs-tooltip="tooltip.title"/>
+              <input style="margin: 10px 0 0 10px;" type="checkbox" ng-model="tooltip.checked" data-placement="right" bs-tooltip="tooltip.title">
             </div>
+          </div>
         </div>
-    </li>
-</ul>
+        <pre class="prettyprint linenums" ng-non-bindable>
+&lt;!-- Basic tooltip on hover --&gt;
+&lt;a href="#" bs-tooltip="tooltip.title"&gt;...&lt;/a&gt;
+&lt;!-- Button to trigger tooltip on click --&gt;
+&lt;button type="submit" class="btn" data-trigger="click" bs-tooltip="tooltip.title"&gt;...&lt;/button&gt;
+&lt;!-- Force close others with data-unique attribute --&gt;
+&lt;input type="text" data-trigger="focus" data-unique="1" bs-tooltip="tooltip.title"/&gt;
+&lt;!-- Two-way databinding --&gt;
+&lt;input type="checkbox" ng-model="tooltip.checked" bs-tooltip="tooltip.title"/&gt;
+        </pre>
+        <div class="alert alert-info">
+          <strong>Heads up!</strong>
+          <em>To prevent databinding issues, "the rule of thumb is, if you﻿ use <code>ng-model</code> there has to be a dot somewhere." Miško Hevery</em>
+        </div>
+      </section>
+    </div>
+  </body>
 
-
-      <!-- Example row of columns -->
-      <div class="row">
-        
-        
-        
-      </div><!-- row -->
-
-      <hr>
-
-      <footer>
-        <p>&copy; Manumake 2013</p>
-      </footer>
-
-    </div> <!-- /container -->
-</body>
 </html>

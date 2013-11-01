@@ -1,6 +1,6 @@
 'use strict';
 
-function AppCtrl($scope, $http) {
+function AppCtrl($scope, $http, $window, $location) {
 
   $http({method: 'GET', url: '/api/categories/'}).
   success(function(data, status, headers, config) {
@@ -13,6 +13,8 @@ function AppCtrl($scope, $http) {
     jQuery('ul>li.active').removeClass('active');
     jQuery(e.target).closest('li').addClass('active');
   };
+
+  $scope.tooltip = {title: "Hello Tooltip<br />This is a multiline message!", checked: false};
 }
 
 function MainCtrl($scope, $http) {
