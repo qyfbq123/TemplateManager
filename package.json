@@ -8,6 +8,7 @@
     "jade": "~0.31.2",
     "iced-coffee-script": "~1.6.3-g",
     "watch": "~0.8.0",
-    "adm-zip": "~0.4.3"
+    "adm-zip": "~0.4.3",
+    "mongoskin": "~0.6.0"
   }
 }

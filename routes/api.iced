@@ -27,3 +27,6 @@ exports.templatesSortByCategory = (req, res)->
     _temp.templates = templates.getTemplatesByCategory c
     _temp.templates = _temp.templates.slice 0, 2 if _temp.templates.length > 2
     return _temp
+
+exports.template = (req, res)->
+  res.json templates.getTemplateById req.params.tid

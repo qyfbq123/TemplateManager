@@ -6,3 +6,6 @@ exports.templates = (req, res)->
 
 exports.subTemplates = (req, res)->
   res.render 'partials/subTemplates'
+
+exports.template = (req, res)->
+  res.render 'partials/template'

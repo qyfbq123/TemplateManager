@@ -58,7 +58,7 @@ tem.readTemplates = (cb)->
             if exists
               manifest = require manifestPath
               _manifest = dirName: fileName
-              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version']
+              _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version', 'require']
               if typeof manifest.category is 'object' and not Array.isArray manifest.category
                 _manifest._category = k for k, v of manifest.category
               else if !manifest.category

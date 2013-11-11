@@ -21,12 +21,24 @@ function MainCtrl($scope, $http) {
   $http({method: 'GET', url: '/api/templates/sort/'}).
   success(function(data, status, headers, config) {
   $scope.sortedTemplates = data;
+  console.log(JSON.stringify(data));
   }).
   error(function(data, status, headers, config) {
     $scope.templates = 'Error!';
   });
 }
 
-function SubCtrl($scope, $routeParams) {
+function SubCtrl($scope, $routeParams, $http) {
   var category = $routeParams.category;
+  $http({method: 'GET', url: '/api/templates/' + category + '/'}).
+    success(function(data, status, headers, config) {
+      $scope.subTemplates = data;
+    }).
+    error(function(data, status, headers, config) {
+      $scope.templates = 'Error!';
+    });
+}
+
+function SingleCtrl() {
+  
 }
