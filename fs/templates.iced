@@ -30,11 +30,11 @@ tem.init = ->
       if self.categories.indexOf(ele._category) is -1
         self.categories.push ele._category
 
-      templatePath = path.resolve templatesPath, ele.dirName
-      zipPath = path.join _tempPath, ele.dirName + '.zip'
-      zip = new AdmZip()
-      zip.addLocalFolder templatePath
-      zip.writeZip zipPath
+      # templatePath = path.resolve templatesPath, ele.dirName
+      # zipPath = path.join _tempPath, ele.dirName + '.zip'
+      # zip = new AdmZip()
+      # zip.addLocalFolder templatePath
+      # zip.writeZip zipPath
 
 tem.readTemplates = (cb)->
 

@@ -3,31 +3,49 @@
     h4.text-center  最新模板
     dl.dl-horizontal
       header(ng-repeat-start = 'ts in sortedTemplates[1].templates')
-      dt {{ts.name}}
+      dt
+        a(href='/template{{ts.id}}/') {{ts.name}}
       dd {{ts.description}}
       footer(ng-repeat-end)
   .col-md-6
     h4.text-center 最热模板
     dl.dl-horizontal
       header(ng-repeat-start = 'ts in sortedTemplates[0].templates')
-      dt {{ts.name}}
+      dt
+        a(href='/template{{ts.id}}/') {{ts.name}}
       dd {{ts.description}}
       footer(ng-repeat-end)
 
+.row
+  table.table.col-md-12
+    caption
+      input.form-control(type='text', placeholder='Search in 10 templates...', autofocus, style='width:25%;')
+    thead
+      tr
+        th 名称
+        th 描述
+        th 作者
+        th 创建
+        th 更新
+    tbody
+      tr(ng-repeat='item in pagedItems[currentPage]')
+        td {{item.name}}
+        td {{item.}}
 
-header(ng-repeat-start = 'st in sortedTemplates')
-.q_title {{st.category}}
-  small.pull-right 查看所有
-.col-md-6(ng-repeat='t in st.templates')
-  .thumbnail(href='#')
-    .row
-      .col-md-5
-        img(src='/images/some.png', alt='...')
-      .col-md-5
-        h4 {{t.name}}
-        p.content(title='{{t.description}}') {{t.description | omitted : 55}}
-        p.text-right
-          a.btn.btn-primary(href='/template{{t.id}}/download/', target='_blank') 下 载
+
+//- header(ng-repeat-start = 'st in sortedTemplates')
+//- .q_title {{st.category}}
+//-   small.pull-right 查看所有
+//- .col-md-6(ng-repeat='t in st.templates')
+//-   .thumbnail(href='#')
+//-     .row
+//-       .col-md-5
+//-         img(src='/images/some.png', alt='...')
+//-       .col-md-5
+//-         h4 {{t.name}}
+//-         p.content(title='{{t.description}}') {{t.description | omitted : 55}}
+//-         p.text-right
+//-           a.btn.btn-primary(href='/template{{t.id}}/download/', target='_blank') 下 载
 
 //- .q_title 测试
 //- .col-md-6
