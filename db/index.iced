@@ -1,2 +1,2 @@
 
-exports = require './templates'
+module.exports = require './templates'

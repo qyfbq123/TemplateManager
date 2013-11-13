@@ -1,4 +1,9 @@
+zipfile = require 'zipfile'
+path = require 'path'
+fs = require 'fs'
 db = require './db'
-db.addTemplate (a:'223'), (e, a)->
+templates = require './fs/templates'
+
+
+templates.readTemplate './templates/BaiduBlog.zip', (a)->
   console.log a
-db.getAllTemplates (e, arr)->

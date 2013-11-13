@@ -1,22 +1,25 @@
 path =require 'path'
 
 templates = require '../fs/templates'
+db = require '../db'
 config = require '../config.json'
 
-templates.init()
 exports.templates = (req, res)->
-  res.json templates.allTemplates
+  db.all (e, templates)->
+    res.json templates
 
 exports.categories = (req, res)->
-  res.json templates.categories
+  db.categories (e, categories)
+    res.json categories
 
 exports.download = (req, res)->
-  t = templates.getTemplateById req.params.tid
-  if !t
-    res.send 'Error!下载出错!' 
-  else 
-    zipPath = path.resolve __dirname, '..', config.templatesPath, '_temp', t.dirName + '.zip'
-    res.download zipPath, t.dirName + '.zip'
+  db.findOne '_id': req.params.tid, (e, t)->
+    if !t
+      res.status
+      res.send 'Error!下载出错!' 
+    else 
+      zipPath = path.resolve __dirname, '..', config.templatesPath, '_temp', t.dirName + '.zip'
+      res.download zipPath, t.dirName + '.zip'
 
 exports.subTemplates = (req, res)->
   res.json templates.getTemplatesByCategory req.params.category

@@ -1,3 +1,5 @@
+
+
 exports.index = (req, res)->
   res.render 'index'
 
@@ -9,3 +11,6 @@ exports.subTemplates = (req, res)->
 
 exports.template = (req, res)->
   res.render 'partials/template'
+
+exports.upload = (req, res)->
+

@@ -1,4 +1,7 @@
 {
   "templatesPath": "../templates",
+  "_templatesPath_comment": "未打包的模板库路径",
+  "archivePath": "./templates",
+  "_archivePath_comment": "打包后的归档路径",
   "dburi": "mongodb://localhost/TemplateManager"
 }

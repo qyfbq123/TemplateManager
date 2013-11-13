@@ -4,10 +4,15 @@ templates = require('./main').templates
 exports.add = (template, cb)->
   templates.insert template, cb
 
-exports.findOne
+exports.findOne = (options, cb)->
+  templates.findOne options, cb
 
 exports.all = (cb)->
   templates.find().toArray cb
 
-exports.clear = ()->
-  templates.drop ->
+exports.clear = (cb)->
+  templates.drop (e)->
+    cb e
+
+exports.categories = (cb)->
+  templates.distinct '_category', cb
