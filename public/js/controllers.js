@@ -25,6 +25,22 @@ function MainCtrl($scope, $http, $filter) {
   $scope.pageItems = [];
   $scope.itemsPerPage = 10;
 
+  $http({method: 'GET', url: '/api/templates/recent5/'}).
+  success(function(data, status, headers, config) {
+  $scope.recent5 = data;
+  }).
+  error(function(data, status, headers, config) {
+    $scope.recent5 = 'Error!';
+  });
+
+  $http({method: 'GET', url: '/api/templates/hot5/'}).
+  success(function(data, status, headers, config) {
+  $scope.hot5 = data;
+  }).
+  error(function(data, status, headers, config) {
+    $scope.hot5 = 'Error!';
+  });
+
   $http({method: 'GET', url: '/api/templates/'}).
   success(function(data, status, headers, config) {
   $scope.items = data;
@@ -45,11 +61,11 @@ function MainCtrl($scope, $http, $filter) {
   $scope.search = function () {
     if(!Array.isArray($scope.items)) return;
     $scope.filteredItems = $filter('filter')($scope.items, function (item) {
-        for(var attr in item) {
-            if (searchMatch(item[attr], $scope.query))
-                return true;
-        }
-        return false;
+      for(var attr in item) {
+        if (typeof item[attr] === 'string' && searchMatch(item[attr], $scope.query))
+          return true;
+      }
+      return false;
     });
     $scope.currentPage = 0;
     // now group by pages
@@ -72,7 +88,7 @@ function MainCtrl($scope, $http, $filter) {
 
 function SubCtrl($scope, $routeParams, $http) {
   var category = $routeParams.category;
-  $http({method: 'GET', url: '/api/templates/' + category + '/'}).
+  $http({method: 'GET', url: '/api/templates/category/', params: {category: category}}).
     success(function(data, status, headers, config) {
       $scope.subTemplates = data;
     }).

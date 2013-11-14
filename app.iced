@@ -27,6 +27,7 @@ app.get '/', routes.index
 app.get '/templates/', routes.templates
 app.get '/subTemplates/', routes.subTemplates
 app.get '/template/', routes.template
+app.get '/template:tid/', routes.templateById
 
 app.get '/template:tid/download/', routes.download
 app.post '/template/upload/', routes.upload
@@ -34,7 +35,9 @@ app.post '/template/upload/', routes.upload
 app.get '/api/categories/', api.categories
 
 app.all '/api/templates/', api.templates
-app.get '/api/templates/:category/', api.subTemplates
+app.get '/api/templates/category/', api.subTemplates
+app.get '/api/templates/recent:number/', api.recentTemplates
+app.get '/api/templates/hot:number/', api.hotTemplates
 
 app.get '/api/template:tid/', api.template
 
@@ -42,11 +45,11 @@ app.get '/api/template:tid/', api.template
 app.get '*', routes.index
 
 app.use (err, req, res, next)->
-	# return next err if req.method == 'GET'
-	if err
-		res.send 500, err.message||String err
-	else
-		next err
+  # return next err if req.method == 'GET'
+  if err
+    res.send 500, err.message||String err
+  else
+    next err
 
 server.listen app.get( 'port' ), ->
   console.log "Express server listening on port #{app.get 'port'}"

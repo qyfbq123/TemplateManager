@@ -4,6 +4,7 @@ fs = require 'fs'
 db = require './db'
 templates = require './fs/templates'
 
+test = ()->
+  console.log arguments
 
-templates.readTemplatesDirectory (e, a)->
-  console.log a
+test 1, 2

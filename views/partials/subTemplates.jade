@@ -9,6 +9,6 @@ header
           a(href='/template{{t.id}}/') {{t.name}}
         p.content(title='{{t.description}}') {{t.description | omitted : 55}}
         p.text-right
-          a.btn.btn-primary(href='/template{{t.id}}/download/', target='_blank') 下 载
+          a.btn.btn-primary(href='/template{{t._id}}/download/', target='_blank') 下 载
 
 footer

@@ -67,12 +67,15 @@ exports.archive = (cb)->
     cwd: templatesPath
     stdio: 'inherit'
   _zip.on 'close', (code)->
+    err = null
     if code != 0
-      console.log 'Some error occurs when packing templates!'
+      err = new Error 'Some error occurs when packing templates!'
     else
       fs.renameSync _tempPath, archivePath
-      cb() if cb
+
     fs.renameSync targetMain, originalMain
+    
+    cb err if cb
 
 getCategory = (category)->
   if typeof category is 'object' and not Array.isArray category
@@ -115,6 +118,7 @@ exports.readTemplatesDirectory = (cb)->
       _manifest.size = _stat.size.toString()
 
       _manifest.created = _manifest.updated = _stat.mtime.getTime().toString()
+      _manifest.download = 0
       _manifest.history = [ manifest.version ]
       
       allTemplates.push _manifest  if _manifest._category
