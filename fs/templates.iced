@@ -81,6 +81,13 @@ getCategory = (category)->
     return 'Other'
   return null
 
+extractManifest = (manifest, _manifest)->
+  _manifest = _manifest || {}
+  _manifest.feature = '测试'
+  _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version', 'require']
+  _manifest._category = getCategory manifest.category
+  return _manifest
+
 exports.readTemplatesDirectory = (cb)->
   return cb() if not fs.existsSync archivePath
 
@@ -90,23 +97,24 @@ exports.readTemplatesDirectory = (cb)->
     files.forEach (name)->
       return if path.extname(name) isnt '.zip'
 
-      zf = new zipfile.ZipFile path.join archivePath, name
+      filepath = path.join archivePath, name
+      zf = new zipfile.ZipFile filepath
       buffer = null
       zf.names.some (_name)->
         if _name.indexOf('manifest') isnt -1
           buffer = zf.readFileSync _name
           return true
+      return if !buffer #若找不到manifest文件，直接返回
       manifest = JSON.parse buffer.toString().replace /\s+/g, ''
 
-      _manifest = filename: name
-      _manifest.feature = '测试'
+      _manifest = extractManifest manifest
+      _manifest.filename = name
+      _manifest.filepath = filepath
+
       _stat = fs.lstatSync(path.join archivePath, name)
       _manifest.size = _stat.size.toString()
-      _manifest.updated = _manifest.created = _stat.mtime.getTime().toString()
 
-      _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version', 'require']
-      _manifest._category = getCategory manifest.category
-
+      _manifest.created = _manifest.updated = _stat.mtime.getTime().toString()
       _manifest.history = [ manifest.version ]
       
       allTemplates.push _manifest  if _manifest._category
@@ -130,13 +138,13 @@ exports.readTemplate = (filepath, cb)->
     if name.indexOf('manifest') isnt -1
       buffer = zf.readFileSync name
       return true
+
+  return cb new Error 'No file named manifest.json in the zip file!' if !buffer
+
   manifest = JSON.parse buffer.toString().replace /\s+/g, ''
 
-  _manifest = filename: path.basename filepath
-  _manifest.feature = '测试'
-  _stat = fs.lstatSync filepath
-  _manifest.size = _stat.size.toString()
-  _manifest[k] = manifest[k] for k, i in ['name', 'description', 'author', 'maintainer', 'category', 'index', 'version', 'require']
-  _manifest._category = getCategory manifest.category
+  _manifest = extractManifest manifest
+  _stat = fs.lstat filepath, (e, _stat)->
+    _manifest.size = _stat.size.toString()
 
-  cb _manifest
+    cb null, _manifest

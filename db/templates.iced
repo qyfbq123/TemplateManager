@@ -14,5 +14,7 @@ exports.clear = (cb)->
   templates.drop (e)->
     cb e
 
+exports.update = (template, cb)->
+	templates.update template, cb
 exports.categories = (cb)->
   templates.distinct '_category', cb

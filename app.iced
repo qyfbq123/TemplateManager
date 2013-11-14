@@ -28,10 +28,10 @@ app.get '/templates/', routes.templates
 app.get '/subTemplates/', routes.subTemplates
 app.get '/template/', routes.template
 
-app.get '/template:tid/download/', api.download
+app.get '/template:tid/download/', routes.download
+app.post '/template/upload/', routes.upload
 
 app.get '/api/categories/', api.categories
-app.get '/api/templates/sort/', api.templatesSortByCategory
 
 app.all '/api/templates/', api.templates
 app.get '/api/templates/:category/', api.subTemplates
@@ -40,6 +40,13 @@ app.get '/api/template:tid/', api.template
 
  # redirect all others to the index (HTML5 history)
 app.get '*', routes.index
+
+app.use (err, req, res, next)->
+	# return next err if req.method == 'GET'
+	if err
+		res.send 500, err.message||String err
+	else
+		next err
 
 server.listen app.get( 'port' ), ->
   console.log "Express server listening on port #{app.get 'port'}"

@@ -5,5 +5,5 @@ db = require './db'
 templates = require './fs/templates'
 
 
-templates.readTemplate './templates/BaiduBlog.zip', (a)->
+templates.readTemplatesDirectory (e, a)->
   console.log a
