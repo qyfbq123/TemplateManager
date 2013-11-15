@@ -22,7 +22,7 @@ function MainCtrl($scope, $http, $filter) {
   $scope.hotItems = [];
 
   $scope.curPage = 0;
-  $scope.pageItems = [];
+  $scope.pagedItems = [];
   $scope.itemsPerPage = 10;
 
   $http({method: 'GET', url: '/api/templates/recent5/'}).
@@ -67,23 +67,59 @@ function MainCtrl($scope, $http, $filter) {
       }
       return false;
     });
-    $scope.currentPage = 0;
+    $scope.curPage = 0;
     // now group by pages
     $scope.groupToPages();
   };
   
   // calculate page in place
   $scope.groupToPages = function () {
-      $scope.pagedItems = [];
-      
-      for (var i = 0; i < $scope.filteredItems.length; i++) {
-          if (i % $scope.itemsPerPage === 0) {
-              $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
-          } else {
-              $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
-          }
+    $scope.pagedItems = [];
+    
+    for (var i = 0; i < $scope.filteredItems.length; i++) {
+      if (i % $scope.itemsPerPage === 0) {
+        $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
+      } else {
+        $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
       }
+    }
   };
+
+  $scope.range = function(start, end) {
+    var ret = [];
+    if(!end) {
+      end = start;
+      start = 0;
+    }
+    for(var i=start; i<end; i++) {
+      ret.push(i);
+    }
+    return ret;
+  };
+
+  function scrollToElement(ele) {
+    jQuery('body').animate({scrollTop: ele.offset().top}, 800);
+  }
+
+  $scope.prevPage = function() {
+    if($scope.curPage > 0) {
+      $scope.curPage--;
+    }
+    scrollToElement(jQuery('#templates'));
+  };
+
+  $scope.nextPage = function() {
+    if($scope.curPage < $scope.pagedItems.length - 1) {
+      $scope.curPage++;
+    }
+     scrollToElement(jQuery('#templates'));
+  };
+
+  $scope.setPage = function() {
+    $scope.curPage = this.n;
+     scrollToElement(jQuery('#templates'));
+  };
+
 }
 
 function SubCtrl($scope, $routeParams, $http) {

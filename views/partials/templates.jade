@@ -16,7 +16,7 @@
       dd {{t.description}}
       footer(ng-repeat-end)
 
-.row
+.row#templates
   table.table.col-md-12
     caption
       input.form-control(type='text', ng-model='query', ng-change='search()', placeholder='Search in {{items.length}} templates...', autofocus, style='width:25%;')
@@ -29,15 +29,26 @@
         th 创建
         th 更新
     tbody
-      tr(ng-repeat='item in pagedItems[currentPage]')
+      tr(ng-repeat='item in pagedItems[curPage]')
         td
           a(href='/template{{item._id}}/') {{item.name}}
         td(title='{{item.description}}') {{item.description}}
         td {{item.author}}
         td
           a(href='#', ng-click='$parent.query = "{{item._category}}"; $parent.search();') {{item._category}}
-        td {{item.created | date:'yyyy-MM-dd HH:mm:ss Z'}}
-        td {{item.updated | date:'yyyy-MM-dd HH:mm:ss Z'}}
+        td {{item.created | date:'yyyy-MM-dd HH:mm'}}
+        td {{item.updated | date:'yyyy-MM-dd HH:mm'}}
+    tfoot
+      tr
+        td(colspan='6')
+          ul.pagination.pull-right
+            li(ng-class='{disabled: curPage == 0}')
+              a(href='#', ng-click='prevPage()') &laquo; Prev
+            li(ng-repeat='n in range(pagedItems.length)', ng-class='{active: n == curPage}', ng-click='setPage()')
+              a(href='#', ng-bind='n+1') 1
+            li(ng-class='{disabled: curPage == pagedItems.length - 1}')
+              a(href='#', ng-click='nextPage()') Next &raquo;
+
 #modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
   .modal-dialog
     .modal-content
