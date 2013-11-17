@@ -133,6 +133,12 @@ function SubCtrl($scope, $routeParams, $http) {
     });
 }
 
-function SingleCtrl() {
-  
+function SingleCtrl($scope, $routeParams, $http) {
+  $http({method: 'GET', url: '/api/templates' + $routeParams.id + '/', params: {category: category}}).
+    success(function(data, status, headers, config) {
+      $scope.template = data;
+    }).
+    error(function(data, status, headers, config) {
+      $scope.templates = 'Error!';
+    });
 }

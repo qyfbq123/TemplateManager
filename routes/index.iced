@@ -19,6 +19,9 @@ exports.subTemplates = (req, res)->
 exports.template = (req, res)->
   res.render 'partials/template'
 
+exports.goupload = (req, res)->
+  res.render 'upload'
+
 exports.templateById = (req, res)->
   
 

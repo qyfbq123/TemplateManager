@@ -1,0 +1,17 @@
+.thumbnail(href='#')
+  .row
+    .col-md-3
+      img(src='/images/some.png', alt='...')
+    .col-md-9
+      h4
+        a(href='/template{{template.id}}/') {{template.name}}
+      dl
+      	dt 简介
+        dd {{template.description}}
+        dt 作者
+        dd {{template.author}}
+        dt 历史版本
+        dd {{template.history}}
+  .row
+    .pull-right
+      a(href='/template{{template.id}}/download/) 下载

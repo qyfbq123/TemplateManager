@@ -27,6 +27,7 @@ app.get '/', routes.index
 app.get '/templates/', routes.templates
 app.get '/subTemplates/', routes.subTemplates
 app.get '/template/', routes.template
+app.get '/upload/', routes.goupload
 app.get '/template:tid/', routes.templateById
 
 app.get '/template:tid/download/', routes.download

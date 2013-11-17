@@ -1,6 +1,10 @@
 extends layout
 block body
-  .main(style='margin-top: 70px;')
+  .navbar.navbar-default(role='navigation')
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href='/upload/') 上传模板
+  .main
     .container(ng-view, ng-controller = 'AppCtrl')
           
   script(src = 'components/jquery/jquery.js')
