@@ -4,7 +4,7 @@
     dl.dl-horizontal
       header(ng-repeat-start = 't in recent5')
       dt
-        a(href='/template{{t._id}}/') {{t.name}}
+        a(href='/template/{{t._id}}/') {{t.name}}
       dd {{t.description}}
       footer(ng-repeat-end)
   .col-md-6
@@ -12,7 +12,7 @@
     dl.dl-horizontal
       header(ng-repeat-start = 't in hot5')
       dt
-        a(href='/template{{t._id}}/', data-toggle='modal', data-target='#modal') {{t.name}}
+        a(href='/template/{{t._id}}/', data-toggle='modal', data-target='#modal') {{t.name}}
       dd {{t.description}}
       footer(ng-repeat-end)
 
@@ -31,7 +31,7 @@
     tbody
       tr(ng-repeat='item in pagedItems[curPage]')
         td
-          a(href='/template{{item._id}}/') {{item.name}}
+          a(href='/template/{{item._id}}/') {{item.name}}
         td(title='{{item.description}}') {{item.description}}
         td {{item.author}}
         td

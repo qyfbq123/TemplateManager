@@ -1,8 +1,13 @@
+- console.log(message);
+#message.alert.alert-info(class="#{typeof message != 'undefined' ? '' : 'hide'}")
+  button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+  !=message
+
 form(action='/template/upload/', method='post', enctype='multipart/form-data')
-	dl
-		dt 请选择上传文件：
-		dd
-			input(type='file', name='zipFile')
-		dt &nbsp;
-		dd
-			input(type='submit') 上传
+  dl.dl-horizontal
+    dt 请选择上传文件：
+    dd
+      input(type='file', name='zipFile')
+    dt &nbsp;
+    dd
+      button.btn.btn-primary(type='submit') 上传

@@ -15,12 +15,21 @@ app.set 'view engine', 'jade'
 app.use express.logger 'dev'
 app.use express.bodyParser()
 app.use express.methodOverride()
+app.use express.cookieParser 'some secret'
+app.use express.cookieSession()
 app.use express.static path.join __dirname, 'public'
 app.use express.static path.resolve __dirname, '.', config.templatesPath
 app.use app.router
 
 app.configure 'development', ->
   app.use express.errorHandler()
+
+app.all '*', (req, res, next)->
+  console.log req.session.message
+  if req.session.message
+    res.locals.message = req.session.message
+    req.session.message = undefined
+  next()
 
 app.get '/', routes.index
 

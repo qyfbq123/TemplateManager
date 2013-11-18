@@ -134,7 +134,7 @@ exports.readTemplatesDirectory = (cb)->
     cb err, allTemplates
 
 exports.readTemplate = (filepath, cb)->
-  return if path.extname(filepath) isnt '.zip'
+  # return if path.extname(filepath) isnt '.zip'
 
   zf = new zipfile.ZipFile filepath
   buffer = null

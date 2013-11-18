@@ -1,6 +1,9 @@
 body {
-  background-color: #333333;
-  color: lightyellow;
+  background-color: #FAFAFA;
+}
+
+.main {
+  margin-top: 70px;
 }
 
 .q_title {
@@ -30,4 +33,8 @@ body {
 
 .width80 {
   width: 80px;
+}
+
+dt, dd {
+  margin-top: 5px;
 }

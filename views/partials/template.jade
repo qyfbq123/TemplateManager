@@ -1,17 +1,37 @@
-.thumbnail(href='#')
-  .row
-    .col-md-3
+.row
+  .col-md-2
+    .thumbnail.pull-left
       img(src='/images/some.png', alt='...')
-    .col-md-9
-      h4
-        a(href='/template{{template.id}}/') {{template.name}}
-      dl
-      	dt 简介
-        dd {{template.description}}
-        dt 作者
-        dd {{template.author}}
-        dt 历史版本
-        dd {{template.history}}
-  .row
-    .pull-right
-      a(href='/template{{template.id}}/download/) 下载
+    
+  .col-md-9
+    dl.dl-horizontal
+      dt &nbsp;
+      dd
+        h4 {{template.name}}
+      dt 简介
+      dd {{template.description}}
+      dt 作者
+      dd {{template.author}}
+      dt 维护人员
+      dd {{template.maintainer}}
+      dt 需要客户端最低版本
+      dd {{template.require}}
+      dt 分类
+      dd {{template._category}}
+      dt 大小
+      dd {{template.size | transByte}}
+      dt 创建
+      dd {{template.created | date:'yyyy-MM-dd HH:mm:ss'}}
+      dt 更新
+      dd {{template.updated | date:'yyyy-MM-dd HH:mm:ss'}}
+      dt 下载次数
+      dd {{template.download}}
+      dt 版本号
+      dd {{template.version}}
+      dt 历史版本
+      dd {{template.history}}
+      dt &nbsp;
+      dd &nbsp;
+      dt &nbsp;
+      dd
+        a.btn.btn-primary(href='/template{{template._id}}/download/', target='_blank') 下载

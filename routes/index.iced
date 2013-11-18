@@ -20,14 +20,17 @@ exports.template = (req, res)->
   res.render 'partials/template'
 
 exports.goupload = (req, res)->
-  res.render 'upload'
+  res.render 'partials/upload'
 
 exports.templateById = (req, res)->
+  console.log 'here'
   
 
 exports.upload = (req, res, next)->
   zipFile = req.files.zipFile
   if zipFile && zipFile
+
+    return next new Error '只接受.zip格式的压缩文件！' if path.extname(zipFile.name) isnt '.zip'
     _fs.readTemplate zipFile.path, (e, manifest)->
       return next e if e
       db.findOne (name: manifest.name, author: manifest.author), (e, t)->
@@ -39,26 +42,30 @@ exports.upload = (req, res, next)->
           t.history.push manifest.version
           t.updated = new Date().getTime().toString()
 
-          db.update t, (e)->
+          db.save t, (e)->
             return next e if e
             fs.unlink t.filepath, (e)->
               return next e if e
-              fs.rename zipFile.path, path.join config.archivePath, "#{t._id.toHexString()}_#{zipFile.name}", (e)->
-                next e
+              fs.rename zipFile.path, path.join(config.archivePath, "#{t._id.toHexString()}_#{zipFile.name}"), (e)->
+                req.session.message = '上传成功'
+                res.redirect 'back'
         else
           manifest.filename = zipFile.name
           manifest.created = manifest.updated = new Date().getTime().toString()
           manifest.download = 0
           manifest.history = [ manifest.version ]
 
-          db.add manifest, (e, t)->
+          db.save manifest, (e, t)->
             return next e if e
 
             pathname =  path.join config.archivePath, "#{t._id.toHexString()}_#{t.filename}"
-            manifest.filepath = pathname
-            db.update manifest, ->
-            fs.rename zipFile.path, pathname, (e)->
-              next e
+            t.filepath = pathname
+            db.save t, ->
+              return next e if e
+              fs.rename zipFile.path, pathname, (e)->
+                return next e if e
+                req.session.message = '上传成功'
+                res.redirect 'back'
 
 
 exports.download = (req, res, next)->
@@ -69,5 +76,5 @@ exports.download = (req, res, next)->
       res.send 500, 'Error!下载出错!' 
     else
       t.download += 1
-      db.update t, (e)->
+      db.save t, (e)->
       res.download t.filepath, t.filename

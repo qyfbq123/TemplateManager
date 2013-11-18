@@ -62,8 +62,9 @@ function MainCtrl($scope, $http, $filter) {
     if(!Array.isArray($scope.items)) return;
     $scope.filteredItems = $filter('filter')($scope.items, function (item) {
       for(var attr in item) {
-        if (typeof item[attr] === 'string' && searchMatch(item[attr], $scope.query))
+        if (typeof item[attr] === 'string' && searchMatch(item[attr], $scope.query)) {
           return true;
+        }
       }
       return false;
     });
@@ -98,7 +99,7 @@ function MainCtrl($scope, $http, $filter) {
   };
 
   function scrollToElement(ele) {
-    jQuery('body').animate({scrollTop: ele.offset().top}, 800);
+    jQuery('body').animate({scrollTop: ele.offset().top - 70}, 800);
   }
 
   $scope.prevPage = function() {
@@ -134,7 +135,7 @@ function SubCtrl($scope, $routeParams, $http) {
 }
 
 function SingleCtrl($scope, $routeParams, $http) {
-  $http({method: 'GET', url: '/api/templates' + $routeParams.id + '/', params: {category: category}}).
+  $http({method: 'GET', url: '/api/template' + $routeParams.id + '/'}).
     success(function(data, status, headers, config) {
       $scope.template = data;
     }).

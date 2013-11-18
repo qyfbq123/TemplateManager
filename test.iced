@@ -2,9 +2,10 @@ zipfile = require 'zipfile'
 path = require 'path'
 fs = require 'fs'
 db = require './db'
+_fs = require './fs'
 templates = require './fs/templates'
 
-test = ()->
-  console.log arguments
+console.log _fs
+# db.all (e, templates)->
+#   console.log templates
 
-test 1, 2
