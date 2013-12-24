@@ -1,63 +1,80 @@
-.row
-  .col-md-6
-    h4.text-center  最新模板
-    dl.dl-horizontal
-      header(ng-repeat-start = 't in recent5')
-      dt
-        a(href='/template/{{t._id}}/') {{t.name}}
-      dd {{t.description}}
-      footer(ng-repeat-end)
-  .col-md-6
-    h4.text-center 最热模板
-    dl.dl-horizontal
-      header(ng-repeat-start = 't in hot5')
-      dt
-        a(href='/template/{{t._id}}/', data-toggle='modal', data-target='#modal') {{t.name}}
-      dd {{t.description}}
-      footer(ng-repeat-end)
+//- .row
+//-   .col-md-6
+//-     h4.text-center  最新模板
+//-     dl.dl-horizontal
+//-       header(ng-repeat-start = 't in recent5')
+//-       dt
+//-         a(href='/template/{{t._id}}/') {{t.name}}
+//-       dd {{t.description}}
+//-       footer(ng-repeat-end)
+//-   .col-md-6
+//-     h4.text-center 最热模板
+//-     dl.dl-horizontal
+//-       header(ng-repeat-start = 't in hot5')
+//-       dt
+//-         a(href='/template/{{t._id}}/', data-toggle='modal', data-target='#modal') {{t.name}}
+//-       dd {{t.description}}
+//-       footer(ng-repeat-end)
 
-.row#templates
-  table.table.col-md-12
-    caption
-      input.form-control(type='text', ng-model='query', ng-change='search()', placeholder='Search in {{items.length}} templates...', autofocus, style='width:25%;')
-    thead
-      tr
-        th.width80 名称
-        th 描述
-        th 作者
-        th.width80 分类
-        th 创建
-        th 更新
-    tbody
-      tr(ng-repeat='item in pagedItems[curPage]')
-        td
-          a(href='/template/{{item._id}}/') {{item.name}}
-        td(title='{{item.description}}') {{item.description}}
-        td {{item.author}}
-        td
-          a(href='#', ng-click='$parent.query = "{{item._category}}"; $parent.search();') {{item._category}}
-        td {{item.created | date:'yyyy-MM-dd HH:mm'}}
-        td {{item.updated | date:'yyyy-MM-dd HH:mm'}}
-    tfoot
-      tr
-        td(colspan='6')
-          ul.pagination.pull-right
-            li(ng-class='{disabled: curPage == 0}')
-              a(href='#', ng-click='prevPage()') &laquo; Prev
-            li(ng-repeat='n in range(pagedItems.length)', ng-class='{active: n == curPage}', ng-click='setPage()')
-              a(href='#', ng-bind='n+1') 1
-            li(ng-class='{disabled: curPage == pagedItems.length - 1}')
-              a(href='#', ng-click='nextPage()') Next &raquo;
+#tcontent
+  #intro.intro.intro1 在这里，你可以对所有模板进行管理...
+  span 共
+    strong  {{items.length}} 
+    |个模板，持续更新中...
+  form.form-inline
+    .form-group
+      input.form-control.form-control(type='text', ng-model='query', ng-change='search()', autofocus)
+    button.btn 搜索
+  hr
+  .template(ng-repeat='item in pagedItems[curPage]')
+    h5
+      a(href='/template/{{item._id}}/') {{item.name}}
+      small.pull-right
+        button.btn-primary 下  载
+    |{{item.description}}
 
-#modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-  .modal-dialog
-    .modal-content
-      .modal-header
-        h4#myModalLabel.modal-title Modal title
-      .modal-body
-      .modal-footer
-        button.btn.btn-default(type='button', data-dismiss='modal') Close
-        button.btn.btn-primary(type='button') Save
+//- .row#templates
+//-   table.table.col-md-12
+//-     caption
+//-       input.form-control(type='text', ng-model='query', ng-change='search()', placeholder='Search in {{items.length}} templates...', autofocus, style='width:25%;')
+//-     thead
+//-       tr
+//-         th.width80 名称
+//-         th 描述
+//-         th 作者
+//-         th.width80 分类
+//-         th 创建
+//-         th 更新
+//-     tbody
+//-       tr(ng-repeat='item in pagedItems[curPage]')
+//-         td
+//-           a(href='/template/{{item._id}}/') {{item.name}}
+//-         td(title='{{item.description}}') {{item.description}}
+//-         td {{item.author}}
+//-         td
+//-           a(href='#', ng-click='$parent.query = "{{item._category}}"; $parent.search();') {{item._category}}
+//-         td {{item.created | date:'yyyy-MM-dd HH:mm'}}
+//-         td {{item.updated | date:'yyyy-MM-dd HH:mm'}}
+//-     tfoot
+//-       tr
+//-         td(colspan='6')
+//-           ul.pagination.pull-right
+//-             li(ng-class='{disabled: curPage == 0}')
+//-               a(href='#', ng-click='prevPage()') &laquo; Prev
+//-             li(ng-repeat='n in range(pagedItems.length)', ng-class='{active: n == curPage}', ng-click='setPage()')
+//-               a(href='#', ng-bind='n+1') 1
+//-             li(ng-class='{disabled: curPage == pagedItems.length - 1}')
+//-               a(href='#', ng-click='nextPage()') Next &raquo;
+
+//- #modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+//-   .modal-dialog
+//-     .modal-content
+//-       .modal-header
+//-         h4#myModalLabel.modal-title Modal title
+//-       .modal-body
+//-       .modal-footer
+//-         button.btn.btn-default(type='button', data-dismiss='modal') Close
+//-         button.btn.btn-primary(type='button') Save
 
 
 //- header(ng-repeat-start = 'st in sortedTemplates')
@@ -96,5 +113,5 @@
 //-         p A bunch of text will do here so about this thumbnail heading.  yep goes right here!
 //-         p
 //-           a.btn.btn-primary(href='#') Button
-//-           a.btn(href='#') Action
-footer(ng-repeat-end)
+//- //-           a.btn(href='#') Action
+//- footer(ng-repeat-end)

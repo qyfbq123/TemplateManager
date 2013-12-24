@@ -7,9 +7,25 @@ block body
       ul.nav.navbar-nav
       ul.nav.navbar-nav.navbar-right
         li
-          a(href='/goupload/') 上传模板
+          a(href='/upload/') 上传模板
   .main
-    .container(ng-view, ng-controller = 'AppCtrl')
+    .container
+      .row
+        .col-md-2
+          input.form-control(type='search', placeholder='搜索')
+          hr
+          ul.nav.nav-pills.nav-stacked.submenu
+            li
+              a(href='#') 我的
+                span.badge.badge-important 1
+            li
+              a(href='#') 你的
+        .col-md-1
+        .col-md-6(ng-view, ng-controller = 'AppCtrl')
+
+  footer
+    .container
+      span 版权所有
           
   script(src = 'components/jquery/jquery.js')
   script(src = 'components/angular/angular.js')
