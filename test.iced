@@ -5,7 +5,7 @@ db = require './db'
 _fs = require './fs'
 templates = require './fs/templates'
 
-console.log _fs
-# db.all (e, templates)->
-#   console.log templates
+db.categories (err, r)->
+  console.log err if err
+  console.log r
 

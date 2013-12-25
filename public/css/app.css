@@ -43,6 +43,14 @@ dt, dd {
   margin-bottom: 26px;
 }
 
+.head {
+  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 4px;
+  margin-bottom: 18px;
+}
+
 #tcontent h5 {
   padding: 0;
   margin: 0;
@@ -58,3 +66,16 @@ footer {
   padding-bottom: 30px;
   border-top: 1px solid rgb(229, 229, 229);
 }
+
+.column-list {
+  line-height: 1.5em;
+  list-style: square none outside;
+  padding: 0;
+  margin: 0 0 22px 16px;
+}
+
+.column-list li {
+  padding: 0 0 4px 0;
+  margin: 0;
+}
+

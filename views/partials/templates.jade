@@ -1,3 +1,29 @@
+#tcontent.row
+  .col-md-9
+    #intro.intro.intro1 在这里，你可以对所有模板进行管理...
+    span 共
+      strong  {{items.length}} 
+      |个模板，持续更新中...
+    form.form-inline
+      .form-group
+        input.form-control.form-control(type='text', ng-model='query', ng-change='search()', autofocus)
+      button.btn 搜索
+    h4.head 最新模板
+    .template(ng-repeat='item in recent5')
+      h5
+        a(href='/template/{{item._id}}/') {{item.name}}
+        small.pull-right
+          button.btn-primary 下  载
+      |{{item.description}}
+  .col-md-3
+    h4.head 最热模板
+    ul.column-list
+      li(ng-repeat='item in hot5')
+        a(href='/template/{{item._id}}/') {{item.name}}
+        br
+        |下载 {{item.download}} 次
+
+
 //- .row
 //-   .col-md-6
 //-     h4.text-center  最新模板
@@ -15,23 +41,6 @@
 //-         a(href='/template/{{t._id}}/', data-toggle='modal', data-target='#modal') {{t.name}}
 //-       dd {{t.description}}
 //-       footer(ng-repeat-end)
-
-#tcontent
-  #intro.intro.intro1 在这里，你可以对所有模板进行管理...
-  span 共
-    strong  {{items.length}} 
-    |个模板，持续更新中...
-  form.form-inline
-    .form-group
-      input.form-control.form-control(type='text', ng-model='query', ng-change='search()', autofocus)
-    button.btn 搜索
-  hr
-  .template(ng-repeat='item in pagedItems[curPage]')
-    h5
-      a(href='/template/{{item._id}}/') {{item.name}}
-      small.pull-right
-        button.btn-primary 下  载
-    |{{item.description}}
 
 //- .row#templates
 //-   table.table.col-md-12

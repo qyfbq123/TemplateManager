@@ -18,6 +18,7 @@ function AppCtrl($scope, $http, $window, $location) {
 }
 
 function MainCtrl($scope, $http, $filter) {
+  jQuery('ul>li.active').removeClass('active');
   $scope.newestItems = [];
   $scope.hotItems = [];
 

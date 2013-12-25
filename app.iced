@@ -25,7 +25,6 @@ app.configure 'development', ->
   app.use express.errorHandler()
 
 app.all '*', (req, res, next)->
-  console.log req.session.message
   if req.session.message
     res.locals.message = req.session.message
     req.session.message = undefined

@@ -15,9 +15,11 @@ exports.categories = (req, res, next)->
     res.json categories
 
 exports.subTemplates = (req, res, next)->
-  db.find '_category': req.query.category, (e, templates)->
+  db.find '_category': req.query.category, (e, _cursor)->
     return next e if e
-    res.json templates
+    _cursor.toArray (e, templates)->
+      return next e if e
+      res.json templates
 
 exports.template = (req, res, next)->
   db.findOne '_id': ObjectID.createFromHexString(req.params.tid), fields.template, (e, template)->
